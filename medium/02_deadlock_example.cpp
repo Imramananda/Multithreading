@@ -11,6 +11,7 @@ std::mutex m1, m2;
 
 void task1() {
     std::lock_guard<std::mutex> lock1(m1);
+    std::cout<<"task1 "<<std::endl;
     std::this_thread::sleep_for(std::chrono::milliseconds(100));
     std::lock_guard<std::mutex> lock2(m2);
     std::cout << "Task1 completed\n";
@@ -18,6 +19,7 @@ void task1() {
 
 void task2() {
     std::lock_guard<std::mutex> lock2(m2);
+    std::cout<<"task2 "<<std::endl;
     std::this_thread::sleep_for(std::chrono::milliseconds(100));
     std::lock_guard<std::mutex> lock1(m1);
     std::cout << "Task2 completed\n";

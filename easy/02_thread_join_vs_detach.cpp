@@ -16,7 +16,8 @@ void task() {
 int main() {
     std::thread t(task);
     //t.join(); // Join the thread to wait for it to finish
-    
+    std::cout<<"main "<<std::endl;
     t.detach(); // Detach the thread to run independently till the main thread exits
+    std::cout<<"after detach "<<std::endl;
     return 0;
 }

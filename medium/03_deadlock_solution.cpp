@@ -14,10 +14,16 @@ void task() {
     std::lock_guard<std::mutex> lock2(m2, std::adopt_lock);
     std::cout << "Task completed without deadlock\n";
 }
+void task1() {
+    std::lock(m1, m2);
+    std::lock_guard<std::mutex> lock1(m1, std::adopt_lock); // adopt_lock indicates that the mutex is already locked
+    std::lock_guard<std::mutex> lock2(m2, std::adopt_lock);
+    std::cout << "Task1 completed without deadlock\n";
+}
 
 int main() {
     std::thread t1(task);
-    std::thread t2(task);
+    std::thread t2(task1);
     t1.join(); t2.join();
     return 0;
 }
